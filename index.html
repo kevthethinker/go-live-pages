@@ -154,23 +154,35 @@
   .ref-chip .ref-note { font-size: 0.76rem; color: var(--ink-dim); }
   .ref-chip.highlight .ref-note { color: #c3d6cc; }
   .cost-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 44px; align-items: center; }
-  .cost-chart { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; height: 240px; padding: 0 6px; }
+  .chart-area { position: relative; height: 240px; padding: 0 6px 30px; }
+  .bars-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; height: 200px; position: relative; z-index: 2; }
   .cost-group { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
-  .cost-bars { display: flex; align-items: flex-end; gap: 6px; height: 200px; }
-  .cost-bar { width: 26px; border-radius: 5px 5px 0 0; position: relative; transition: transform 0.15s ease; }
+  .cost-bar {
+    width: 34px; border-radius: 5px 5px 0 0; position: relative; background: var(--accent);
+    transition: transform 0.15s ease;
+  }
   .cost-bar:hover { transform: scaleY(1.02); }
   .cost-bar .val {
     position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
     font-size: 0.72rem; font-weight: 700; white-space: nowrap; color: var(--ink-dim);
   }
-  .cost-bar.builder { background: var(--accent); }
-  .cost-bar.golive { background: var(--trust); }
   .cost-group .year-label { margin-top: 10px; font-weight: 700; font-size: 0.85rem; color: var(--ink); }
+  .ref-line {
+    position: absolute; left: 6px; right: 6px; bottom: 142px; height: 0;
+    border-top: 3px dashed var(--trust); z-index: 1;
+  }
+  .ref-tag {
+    position: absolute; left: 6px; bottom: 152px; background: var(--trust); color: #fff;
+    font-size: 0.76rem; font-weight: 700; padding: 5px 12px; border-radius: 999px;
+    white-space: nowrap; z-index: 3;
+  }
   .cost-legend { display: flex; gap: 22px; margin-top: 22px; flex-wrap: wrap; }
   .cost-legend span { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--ink-dim); }
-  .cost-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
-  .cost-legend i.builder { background: var(--accent); }
-  .cost-legend i.golive { background: var(--trust); }
+  .cost-legend i.builder { width: 12px; height: 12px; border-radius: 3px; display: inline-block; background: var(--accent); }
+  .cost-legend i.golive {
+    width: 16px; height: 2px; display: inline-block;
+    background-image: linear-gradient(90deg, var(--trust) 60%, transparent 60%); background-size: 6px 2px;
+  }
   .cost-callout {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 28px;
     box-shadow: var(--shadow-md);
@@ -458,46 +470,42 @@
 
       <div class="cost-wrap">
         <div>
-          <div class="cost-chart" role="img" aria-label="What you owe each year, using Wix's own published Light plan price of $17/month, plus a comparable one-time design and setup cost on both sides: in year 1, Wix totals $1,504 (design/setup plus a year of hosting) and GoLivePages totals $1,300 (one time). From year 3 onward, Wix still charges $204 every single year, while GoLivePages charges $0 — nothing further, ever.">
-            <div class="cost-group">
-              <div class="cost-bars">
-                <div class="cost-bar builder" style="height:200px"><span class="val">$1,504</span></div>
-                <div class="cost-bar golive" style="height:173px"><span class="val">$1,300</span></div>
+          <div class="chart-area" role="img" aria-label="Cumulative cost by year, using Wix's own published Light plan price of $17/month, plus a comparable one-time design and setup cost on both sides. Wix's total climbs every year: $1,504 in year 1, $1,708 in year 2, $1,912 in year 3, $2,116 in year 4, $2,320 in year 5. GoLivePages is a flat $1,300 total, paid once, the same in every year.">
+            <span class="ref-tag">GoLivePages — $1,300 total, paid once</span>
+            <span class="ref-line"></span>
+            <div class="bars-row">
+              <div class="cost-group">
+                <div class="cost-bar" style="height:130px"><span class="val">$1,504</span></div>
+                <span class="year-label">Year 1</span>
               </div>
-              <span class="year-label">Year 1</span>
-            </div>
-            <div class="cost-group">
-              <div class="cost-bars">
-                <div class="cost-bar builder" style="height:27px"><span class="val">$204</span></div>
-                <div class="cost-bar golive" style="height:4px"><span class="val">$0</span></div>
+              <div class="cost-group">
+                <div class="cost-bar" style="height:147px"><span class="val">$1,708</span></div>
+                <span class="year-label">Year 2</span>
               </div>
-              <span class="year-label">Year 3</span>
-            </div>
-            <div class="cost-group">
-              <div class="cost-bars">
-                <div class="cost-bar builder" style="height:27px"><span class="val">$204</span></div>
-                <div class="cost-bar golive" style="height:4px"><span class="val">$0</span></div>
+              <div class="cost-group">
+                <div class="cost-bar" style="height:165px"><span class="val">$1,912</span></div>
+                <span class="year-label">Year 3</span>
               </div>
-              <span class="year-label">Year 5</span>
-            </div>
-            <div class="cost-group">
-              <div class="cost-bars">
-                <div class="cost-bar builder" style="height:27px"><span class="val">$204</span></div>
-                <div class="cost-bar golive" style="height:4px"><span class="val">$0</span></div>
+              <div class="cost-group">
+                <div class="cost-bar" style="height:182px"><span class="val">$2,116</span></div>
+                <span class="year-label">Year 4</span>
               </div>
-              <span class="year-label">Year 10</span>
+              <div class="cost-group">
+                <div class="cost-bar" style="height:200px"><span class="val">$2,320</span></div>
+                <span class="year-label">Year 5</span>
+              </div>
             </div>
           </div>
           <div class="cost-legend">
-            <span><i class="builder"></i> Wix Light plan — design/setup once, then $204 every year, forever</span>
-            <span><i class="golive"></i> GoLivePages — $1,300 once, then $0 every year after</span>
+            <span><i class="builder"></i> Wix Light plan — total spent so far, growing every year</span>
+            <span><i class="golive"></i> GoLivePages — $1,300 total, paid once, never rises</span>
           </div>
         </div>
 
         <div class="cost-callout">
           <div class="big">$1,020 saved by year 5</div>
-          <p>Year one, both paths cost about the same — real design work isn't free either way. The difference shows up after that: GoLivePages drops to $0, nothing further, ever. Wix's own cheapest ad-free plan keeps billing $17/month — $204 every single year, for as long as the site exists. Squarespace runs $19/mo, typical shared hosting $10–12/mo — this uses the <em>cheapest</em> real option on purpose, not the most expensive, so the comparison stays fair. By year 10, the gap reaches $2,040.</p>
-          <p class="fine">Assumes a comparable one-time design/setup investment on both paths, priced here at GoLivePages' own Standard rate ($1,300). Wix Light plan pricing ($17/mo) as published by Wix, cross-checked via <a href="https://www.websitebuilderexpert.com/website-builders/wix-pricing/" target="_blank" rel="noopener">websitebuilderexpert.com</a>, September 2026 — plans and prices change, so double-check current rates before quoting a client. Domain registration (~$12–20/year) applies either way and isn't counted here.</p>
+          <p>Every year, the orange bar climbs higher because the $17/month never stops. The green line never moves — there's no year where the one-time site costs more. Squarespace runs $19/mo, typical shared hosting $10–12/mo — this uses the <em>cheapest</em> real option on purpose, not the most expensive, so the comparison stays fair.</p>
+          <p class="fine">Assumes a comparable one-time design/setup investment on both paths, priced here at GoLivePages' own Standard rate ($1,300). Wix Light plan pricing ($17/mo) as published by Wix, cross-checked via <a href="https://www.websitebuilderexpert.com/website-builders/wix-pricing/" target="_blank" rel="noopener">websitebuilderexpert.com</a>, rates as of time of writing — plans and prices change. Domain registration (~$12–20/year) applies either way and isn't counted here.</p>
         </div>
       </div>
     </div>
