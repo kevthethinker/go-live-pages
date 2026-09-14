@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Go Live Pages — Professional Websites, No Monthly Hosting Bill</title>
-<meta name="description" content="Go Live Pages builds clean, custom websites for small businesses, contractors, and independent professionals in Freeport, Stephenson County, Rockford, and Northwest Illinois — without a mandatory monthly hosting fee.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%232B2420'/%3E%3Cpath d='M50 20 L74 52 L58 52 L58 82 L42 82 L42 52 L26 52 Z' fill='%23E8862F'/%3E%3C/svg%3E">
+<title>GoLivePages — Professional Websites, No Monthly Hosting Bill</title>
+<meta name="description" content="GoLivePages builds clean, custom websites for small businesses, contractors, and independent professionals — no mandatory monthly hosting fee.">
+<link rel="canonical" href="https://golivepages.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%232B2420'/%3E%3Cpath d='M50 20 L26 80 L50 80 Z' fill='%23F0A860'/%3E%3Cpath d='M50 20 L74 80 L50 80 Z' fill='%23C76A1D'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Go Live Pages — Professional Websites, No Monthly Hosting Bill">
+<meta property="og:title" content="GoLivePages — Professional Websites, No Monthly Hosting Bill">
 <meta property="og:description" content="Custom websites for small businesses and independent professionals. No mandatory monthly hosting fee, no hidden bills — just a real website you own.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go Live Pages — Professional Websites, No Monthly Hosting Bill">
+<meta name="twitter:title" content="GoLivePages — Professional Websites, No Monthly Hosting Bill">
 <meta name="twitter:description" content="Custom websites for small businesses and independent professionals. No mandatory monthly hosting fee, no hidden bills — just a real website you own.">
 <style>
   :root {
@@ -22,6 +23,7 @@
     --line: #e4dcc9;
     --accent: #e8862f;
     --accent-dark: #c76a1d;
+    --accent-light: #f0a860;
     --trust: #3f5d4e;
     --trust-light: #5c7c6b;
     --bad: #b3493a;
@@ -99,8 +101,12 @@
   }
 
   /* Hero */
-  .hero { padding: 76px 0 64px; overflow: hidden; }
-  .hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .hero {
+    padding: 76px 0 64px; overflow: hidden;
+    background-image: linear-gradient(180deg, rgba(250,246,239,0.94), rgba(250,246,239,0.97)), url('assets/hero-typing.jpg');
+    background-size: cover;
+    background-position: center 35%;
+  }
   .hero .eyebrow {
     display: inline-block; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
     font-size: 0.78rem; color: var(--trust); background: #e8efe9; padding: 6px 12px; border-radius: 999px;
@@ -109,7 +115,6 @@
   .hero p.lead { font-size: 1.15rem; color: var(--ink-dim); max-width: 640px; }
   .hero .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
   .hero .note { margin-top: 18px; font-size: 0.9rem; color: var(--ink-dim); }
-  .hero-art { filter: drop-shadow(var(--shadow-md)); }
   .hero-trust-strip { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
   .hero-trust-strip span { font-size: 0.82rem; color: var(--ink-dim); letter-spacing: 0.02em; }
   .hero-trust-strip .strip-links { display: flex; gap: 18px; margin-top: 8px; flex-wrap: wrap; }
@@ -135,6 +140,19 @@
   .model-card li { margin-bottom: 6px; }
 
   /* Cost comparison */
+  .cost-reference { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+  .ref-chip {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 18px; display: flex; flex-direction: column; min-width: 120px;
+    box-shadow: var(--shadow-sm);
+  }
+  .ref-chip.highlight { background: var(--trust); border-color: var(--trust); }
+  .ref-chip .ref-name { font-size: 0.82rem; font-weight: 600; color: var(--ink-dim); }
+  .ref-chip.highlight .ref-name { color: #d8e5df; }
+  .ref-chip .ref-price { font-family: ui-serif, Georgia, serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+  .ref-chip.highlight .ref-price { color: #fff; }
+  .ref-chip .ref-note { font-size: 0.76rem; color: var(--ink-dim); }
+  .ref-chip.highlight .ref-note { color: #c3d6cc; }
   .cost-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 44px; align-items: center; }
   .cost-chart { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; height: 240px; padding: 0 6px; }
   .cost-group { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
@@ -215,15 +233,31 @@
 
   /* Portfolio */
   .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-  .work-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px;
-    text-decoration: none; color: var(--ink); display: block;
-    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  .work-item {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+    box-shadow: var(--shadow-sm); transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .work-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-lift); }
-  .work-card .site-name { font-family: ui-serif, Georgia, serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
-  .work-card .site-url { color: var(--trust); font-size: 0.88rem; margin-bottom: 12px; display: block; }
-  .work-card p { color: var(--ink-dim); margin: 0; font-size: 0.95rem; }
+  .work-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  .work-item .site-name { font-family: ui-serif, Georgia, serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: var(--ink); }
+  .work-thumb {
+    display: block; border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  }
+  .work-thumb .chrome-bar {
+    background: var(--bg-alt); padding: 8px 10px; display: flex; align-items: center; gap: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .work-thumb .chrome-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .work-thumb .chrome-url {
+    margin-left: 6px; font-size: 0.72rem; color: var(--ink-dim); background: #fff;
+    padding: 3px 10px; border-radius: 6px; border: 1px solid var(--line); flex: 1;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .work-thumb .shot {
+    height: 150px; background-size: cover; background-position: top center;
+    transition: background-position 3s ease;
+  }
+  .work-thumb:hover .shot { background-position: bottom center; }
+  .work-item p { color: var(--ink-dim); margin: 14px 0 0; font-size: 0.95rem; }
 
   /* FAQ */
   details.faq { border-bottom: 1px solid var(--line); padding: 16px 0; }
@@ -237,14 +271,29 @@
   details.faq p { margin: 12px 0 0; color: var(--ink-dim); }
 
   /* About */
+  #about {
+    background-image: linear-gradient(180deg, rgba(250,246,239,0.94), rgba(250,246,239,0.98)), url('assets/about-remote-desk.jpg');
+    background-size: cover;
+    background-position: center 60%;
+  }
+  #process {
+    background-image: linear-gradient(180deg, rgba(250,246,239,0.95), rgba(250,246,239,0.97)), url('assets/process-checklist.jpg');
+    background-size: cover;
+    background-position: center 30%;
+  }
   .about-wrap { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; }
   .about-mark {
-    width: 84px; height: 84px; border-radius: 50%; background: var(--trust); flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center; color: #fff; font-family: ui-serif, Georgia, serif;
-    font-size: 1.8rem; font-weight: 700;
+    width: 84px; height: 84px; flex-shrink: 0; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
   }
+  .about-mark svg { width: 100%; height: 100%; display: block; }
 
   /* Contact */
+  #contact {
+    background-image: linear-gradient(180deg, rgba(241,233,217,0.93), rgba(241,233,217,0.97)), url('assets/contact-blueprint.jpg');
+    background-size: cover;
+    background-position: center 35%;
+  }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
   .field { margin-bottom: 16px; }
   .field label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem; }
@@ -280,13 +329,23 @@
     .nav-toggle-label { display: flex; align-items: center; justify-content: center; }
     .model-grid, .services-grid, .scope-grid, .steps, .pricing-grid, .work-grid, .contact-grid { grid-template-columns: 1fr; }
     .about-wrap { grid-template-columns: 1fr; }
-    .hero .wrap { grid-template-columns: 1fr; }
-    .hero-art { max-width: 280px; margin: 0 auto; }
     .cost-wrap { grid-template-columns: 1fr; }
     .cost-chart { height: 200px; }
     .cost-bars { height: 160px; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "GoLivePages",
+  "url": "https://golivepages.com/",
+  "description": "Custom websites for small businesses, contractors, and independent professionals — no mandatory monthly hosting fee.",
+  "email": "contact@golivepages.com",
+  "priceRange": "$600-$1300",
+  "areaServed": "US"
+}
+</script>
 </head>
 <body>
 
@@ -295,8 +354,8 @@
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top">
-      <svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="18" fill="#2b2420"/><path d="M50 20 L74 52 L58 52 L58 82 L42 82 L42 52 L26 52 Z" fill="#e8862f"/></svg>
-      Go Live Pages
+      <svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="var(--ink)"/><path d="M50 20 L26 80 L50 80 Z" fill="var(--accent-light)"/><path d="M50 20 L74 80 L50 80 Z" fill="var(--accent-dark)"/></svg>
+      GoLivePages.com
     </a>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -321,44 +380,22 @@
   <!-- Hero -->
   <section class="hero" id="top">
     <div class="wrap">
-      <div>
-        <span class="eyebrow">Freeport, IL · Serving NW Illinois &amp; remote clients</span>
-        <h1>A professional website — without the monthly bill.</h1>
-        <p class="lead">Go Live Pages builds clean, custom websites for small businesses, contractors, and independent professionals. For sites that qualify, hosting is genuinely free — so the only bill after launch is the one you already expect: your domain name.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#contact">Let's Go Live</a>
-          <a class="btn btn-outline" href="#pricing">See Pricing</a>
-        </div>
-        <p class="note">Built for informational and lead-generation websites — not online stores, logins, or databases. See "Is this right for me?" in the FAQ.</p>
+      <span class="eyebrow">Custom websites for small businesses &amp; contractors</span>
+      <h1>A professional website — without the monthly bill.</h1>
+      <p class="lead">GoLivePages builds clean, custom websites for small businesses, contractors, and independent professionals. For sites that qualify, hosting is genuinely free — so the only bill after launch is the one you already expect: your domain name.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Let's Go Live</a>
+        <a class="btn btn-outline" href="#pricing">See Pricing</a>
+      </div>
+      <p class="note">One-page sites start at $600. Built for informational and lead-generation websites — not online stores, logins, or databases. See "Is this right for me?" in the FAQ.</p>
 
-        <div class="hero-trust-strip">
-          <span>Same practical, no-nonsense approach behind:</span>
-          <div class="strip-links">
-            <a href="https://runkeepstone.com" target="_blank" rel="noopener">runkeepstone.com →</a>
-            <a href="https://emergencysupply1.com" target="_blank" rel="noopener">emergencysupply1.com →</a>
-          </div>
+      <div class="hero-trust-strip">
+        <span>Same practical, no-nonsense approach behind:</span>
+        <div class="strip-links">
+          <a href="https://runkeepstone.com" target="_blank" rel="noopener">runkeepstone.com →</a>
+          <a href="https://emergencysupply1.com" target="_blank" rel="noopener">emergencysupply1.com →</a>
         </div>
       </div>
-
-      <svg class="hero-art" viewBox="0 0 360 280" width="100%" height="auto" aria-hidden="true">
-        <rect x="20" y="14" width="320" height="240" rx="14" fill="#ffffff" stroke="#e4dcc9" stroke-width="2"/>
-        <rect x="20" y="14" width="320" height="34" rx="14" fill="#f1e9d9"/>
-        <rect x="20" y="34" width="320" height="14" fill="#f1e9d9"/>
-        <circle cx="40" cy="31" r="5" fill="#e8862f"/>
-        <circle cx="56" cy="31" r="5" fill="#3f5d4e"/>
-        <circle cx="72" cy="31" r="5" fill="#e4dcc9"/>
-        <rect x="40" y="74" width="180" height="16" rx="4" fill="#2b2420"/>
-        <rect x="40" y="100" width="240" height="10" rx="3" fill="#c9beac"/>
-        <rect x="40" y="116" width="200" height="10" rx="3" fill="#c9beac"/>
-        <rect x="40" y="144" width="90" height="30" rx="7" fill="#e8862f"/>
-        <rect x="140" y="144" width="90" height="30" rx="7" fill="none" stroke="#2b2420" stroke-width="2"/>
-        <rect x="40" y="196" width="80" height="40" rx="8" fill="#eef4ef" stroke="#cfe0d3" stroke-width="1.5"/>
-        <rect x="132" y="196" width="80" height="40" rx="8" fill="#eef4ef" stroke="#cfe0d3" stroke-width="1.5"/>
-        <rect x="224" y="196" width="80" height="40" rx="8" fill="#eef4ef" stroke="#cfe0d3" stroke-width="1.5"/>
-        <path d="M56 216 l8 8 14 -16" fill="none" stroke="#3f5d4e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M148 216 l8 8 14 -16" fill="none" stroke="#3f5d4e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M240 216 l8 8 14 -16" fill="none" stroke="#3f5d4e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
     </div>
   </section>
 
@@ -371,7 +408,7 @@
       </div>
       <div class="model-grid">
         <div class="model-card pay">
-          <h3>What you pay me for</h3>
+          <h3>What you pay us for</h3>
           <ul>
             <li>Design, development, and copywriting</li>
             <li>Initial setup and launch</li>
@@ -382,7 +419,7 @@
         <div class="model-card free">
           <h3>What's genuinely free</h3>
           <ul>
-            <li>Hosting, for qualifying sites, through GitHub Pages</li>
+            <li>Hosting, for qualifying sites, at no ongoing cost</li>
             <li>No hosting subscription, ever, for that site</li>
             <li>No paid plugins or platform fees</li>
           </ul>
@@ -404,50 +441,58 @@
     <div class="wrap">
       <div class="section-head">
         <h2>The real cost difference</h2>
-        <p>A subscription builder's monthly fee isn't the whole story — someone still has to design and set the site up, on either path. This compares the full cost: a comparable one-time design investment either way, plus whatever gets billed on top of it after that.</p>
+        <p>Not a guess — here's what the other guys actually publish, compared honestly: a comparable design/setup cost either way, plus whatever gets billed on top of it after that.</p>
       </div>
+
+      <div class="cost-reference">
+        <div class="ref-chip"><span class="ref-name">Wix</span><span class="ref-price">$17/mo</span><span class="ref-note">Light plan</span></div>
+        <div class="ref-chip"><span class="ref-name">Squarespace</span><span class="ref-price">$19/mo</span><span class="ref-note">Basic plan</span></div>
+        <div class="ref-chip"><span class="ref-name">Shared hosting</span><span class="ref-price">$10–12/mo</span><span class="ref-note">typical renewal rate</span></div>
+        <div class="ref-chip highlight"><span class="ref-name">GoLivePages</span><span class="ref-price">$0/mo</span><span class="ref-note">no hosting bill</span></div>
+      </div>
+
       <div class="cost-wrap">
         <div>
-          <div class="cost-chart" role="img" aria-label="Cumulative cost comparison, including a comparable one-time design and setup cost on both sides: a subscription builder reaches $1,624 at year 1, $2,272 at year 3, $2,920 at year 5, and $4,540 at year 10. The Go Live Pages Standard package is a one-time $1,300 with no recurring platform fee, shown flat across all years.">
+          <div class="cost-chart" role="img" aria-label="What you owe each year, using Wix's own published Light plan price of $17/month, plus a comparable one-time design and setup cost on both sides: in year 1, Wix totals $1,504 (design/setup plus a year of hosting) and GoLivePages totals $1,300 (one time). From year 3 onward, Wix still charges $204 every single year, while GoLivePages charges $0 — nothing further, ever.">
             <div class="cost-group">
               <div class="cost-bars">
-                <div class="cost-bar builder" style="height:72px"><span class="val">$1,624</span></div>
-                <div class="cost-bar golive" style="height:57px"><span class="val">$1,300</span></div>
+                <div class="cost-bar builder" style="height:200px"><span class="val">$1,504</span></div>
+                <div class="cost-bar golive" style="height:173px"><span class="val">$1,300</span></div>
               </div>
               <span class="year-label">Year 1</span>
             </div>
             <div class="cost-group">
               <div class="cost-bars">
-                <div class="cost-bar builder" style="height:100px"><span class="val">$2,272</span></div>
-                <div class="cost-bar golive" style="height:57px"><span class="val">$1,300</span></div>
+                <div class="cost-bar builder" style="height:27px"><span class="val">$204</span></div>
+                <div class="cost-bar golive" style="height:4px"><span class="val">$0</span></div>
               </div>
               <span class="year-label">Year 3</span>
             </div>
             <div class="cost-group">
               <div class="cost-bars">
-                <div class="cost-bar builder" style="height:129px"><span class="val">$2,920</span></div>
-                <div class="cost-bar golive" style="height:57px"><span class="val">$1,300</span></div>
+                <div class="cost-bar builder" style="height:27px"><span class="val">$204</span></div>
+                <div class="cost-bar golive" style="height:4px"><span class="val">$0</span></div>
               </div>
               <span class="year-label">Year 5</span>
             </div>
             <div class="cost-group">
               <div class="cost-bars">
-                <div class="cost-bar builder" style="height:200px"><span class="val">$4,540</span></div>
-                <div class="cost-bar golive" style="height:57px"><span class="val">$1,300</span></div>
+                <div class="cost-bar builder" style="height:27px"><span class="val">$204</span></div>
+                <div class="cost-bar golive" style="height:4px"><span class="val">$0</span></div>
               </div>
               <span class="year-label">Year 10</span>
             </div>
           </div>
           <div class="cost-legend">
-            <span><i class="builder"></i> Subscription builder — design/setup + ~$27/mo, forever</span>
-            <span><i class="golive"></i> Go Live Pages — Standard package, one time, nothing after</span>
+            <span><i class="builder"></i> Wix Light plan — design/setup once, then $204 every year, forever</span>
+            <span><i class="golive"></i> GoLivePages — $1,300 once, then $0 every year after</span>
           </div>
         </div>
 
         <div class="cost-callout">
-          <div class="big">Cheaper from day one</div>
-          <p>Since the design and setup work costs about the same either way, a subscription builder costs more starting in year one — because its monthly fee stacks on top of that same design cost, indefinitely. A one-time site doesn't add anything after launch.</p>
-          <p class="fine">Illustrative comparison: assumes a comparable one-time design/setup investment on both sides, priced here at Go Live Pages' own Standard rate ($1,300), with a common $25–30/month builder platform fee added on top of that for the subscription path. Actual design costs and plans vary by provider. Domain registration (~$12–20/year) applies either way and isn't counted here.</p>
+          <div class="big">$1,020 saved by year 5</div>
+          <p>Year one, both paths cost about the same — real design work isn't free either way. The difference shows up after that: GoLivePages drops to $0, nothing further, ever. Wix's own cheapest ad-free plan keeps billing $17/month — $204 every single year, for as long as the site exists. Squarespace runs $19/mo, typical shared hosting $10–12/mo — this uses the <em>cheapest</em> real option on purpose, not the most expensive, so the comparison stays fair. By year 10, the gap reaches $2,040.</p>
+          <p class="fine">Assumes a comparable one-time design/setup investment on both paths, priced here at GoLivePages' own Standard rate ($1,300). Wix Light plan pricing ($17/mo) as published by Wix, cross-checked via <a href="https://www.websitebuilderexpert.com/website-builders/wix-pricing/" target="_blank" rel="noopener">websitebuilderexpert.com</a>, September 2026 — plans and prices change, so double-check current rates before quoting a client. Domain registration (~$12–25/year) applies either way and isn't counted here.</p>
         </div>
       </div>
     </div>
@@ -457,7 +502,7 @@
   <section id="services">
     <div class="wrap">
       <div class="section-head">
-        <h2>What I do</h2>
+        <h2>What we do</h2>
         <p>Everything needed to take a business from "no real website" to live and working — handled directly, not outsourced.</p>
       </div>
       <div class="services-grid">
@@ -469,7 +514,7 @@
         <div class="service-card">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8862f" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/></svg>
           <h3>Website redesigns</h3>
-          <p>Outdated site or one you built yourself years ago? I'll rebuild it clean, current, and mobile-friendly.</p>
+          <p>Outdated site or one you built yourself years ago? We'll rebuild it clean, current, and mobile-friendly.</p>
         </div>
         <div class="service-card">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8862f" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
@@ -478,8 +523,8 @@
         </div>
         <div class="service-card">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8862f" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/></svg>
-          <h3>Domain &amp; GitHub Pages setup</h3>
-          <p>I connect your domain and configure hosting so it just works — no technical steps left for you to figure out.</p>
+          <h3>Domain &amp; hosting setup</h3>
+          <p>We connect your domain and configure hosting so it just works — no technical steps left for you to figure out.</p>
         </div>
         <div class="service-card">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8862f" stroke-width="2" aria-hidden="true"><path d="M11 4h2l7 16h-4l-1.5-4h-5L8 20H4z"/></svg>
@@ -515,7 +560,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Is this right for your business?</h2>
-        <p>This model is built specifically for informational and lead-generation websites. Being upfront about the limits matters more to me than pretending it fits everything.</p>
+        <p>This model is built specifically for informational and lead-generation websites. Being upfront about the limits matters more to us than pretending it fits everything.</p>
       </div>
       <div class="scope-grid">
         <div class="scope-card yes">
@@ -542,16 +587,16 @@
   </section>
 
   <!-- Process -->
-  <section>
+  <section id="process">
     <div class="wrap">
       <div class="section-head">
         <h2>How it works</h2>
         <p>Five straightforward steps, start to launch.</p>
       </div>
       <div class="steps">
-        <div class="step"><div class="num">1</div><h3>Estimate</h3><p>Tell me about your business and what you need. I'll send a clear price.</p></div>
-        <div class="step"><div class="num">2</div><h3>Content</h3><p>You send over your info, photos, and details — I help organize it if needed.</p></div>
-        <div class="step"><div class="num">3</div><h3>Build</h3><p>I design and build your site — a real custom build, not a template dropped in.</p></div>
+        <div class="step"><div class="num">1</div><h3>Estimate</h3><p>Tell us about your business and what you need. We'll send a clear price.</p></div>
+        <div class="step"><div class="num">2</div><h3>Content</h3><p>You send over your info, photos, and details — we help organize it if needed.</p></div>
+        <div class="step"><div class="num">3</div><h3>Build</h3><p>We design and build your site — a real custom build, not a template dropped in.</p></div>
         <div class="step"><div class="num">4</div><h3>Review</h3><p>You look it over and request changes, within your included revision rounds.</p></div>
         <div class="step"><div class="num">5</div><h3>Go live</h3><p>Domain connected, site launched. Done.</p></div>
       </div>
@@ -563,18 +608,18 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Packages &amp; pricing</h2>
-        <p>A starting proposal — final pricing is confirmed after a short conversation about your specific project. No surprise charges either way.</p>
+        <p>Two clear prices, set upfront — no back-and-forth just to find out what this costs. Anything outside the ordinary scope gets a real quote, not a guess.</p>
       </div>
       <div class="pricing-grid">
         <div class="price-card">
           <h3>Starter</h3>
-          <div class="price">$450–650</div>
+          <div class="price">$600</div>
           <div class="sub">One-time · one page</div>
           <ul>
             <li>Single-page responsive site</li>
             <li>Contact section</li>
             <li>Basic on-page SEO</li>
-            <li>Domain connection &amp; GitHub Pages setup</li>
+            <li>Domain connection &amp; hosting setup</li>
             <li>1 revision round</li>
             <li>~1–2 week turnaround</li>
           </ul>
@@ -583,7 +628,7 @@
         <div class="price-card featured">
           <span class="tag">Most common</span>
           <h3>Standard</h3>
-          <div class="price">$1,000–1,600</div>
+          <div class="price">$1,300</div>
           <div class="sub">One-time · up to 5 pages</div>
           <ul>
             <li>Everything in Starter</li>
@@ -606,7 +651,7 @@
           <div class="not-included">Still within static-site scope — no stores or databases.</div>
         </div>
       </div>
-      <p class="form-note" style="margin-top:22px;">After launch: additional changes beyond included rounds are $50–75 per request, or billed hourly for larger updates. You're never charged a recurring fee just to keep the site online.</p>
+      <p class="form-note" style="margin-top:22px;">After launch: additional changes beyond included rounds are $50 per request, or billed hourly for larger updates. Prefer not to think about it at all? An optional Care Plan ($20/month) covers small text and photo updates, a periodic check that everything's still running, and priority help when you need it — entirely optional. Skip it, and your site keeps working exactly as built; it just won't change on its own.</p>
     </div>
   </section>
 
@@ -615,19 +660,35 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Recent work</h2>
-        <p>Two live examples of the kind of work this site itself is meant to demonstrate.</p>
+        <p>Recent projects we've completed.</p>
       </div>
       <div class="work-grid">
-        <a class="work-card" href="https://runkeepstone.com" target="_blank" rel="noopener">
-          <span class="site-name">Keepstone</span>
-          <span class="site-url">runkeepstone.com</span>
+        <div class="work-item">
+          <h3 class="site-name">Keepstone</h3>
+          <a class="work-thumb" href="https://runkeepstone.com" target="_blank" rel="noopener">
+            <div class="chrome-bar">
+              <span class="chrome-dot" style="background:#e8862f"></span>
+              <span class="chrome-dot" style="background:#3f5d4e"></span>
+              <span class="chrome-dot" style="background:#e4dcc9"></span>
+              <span class="chrome-url">runkeepstone.com</span>
+            </div>
+            <div class="shot" style="background-image: url('assets/work-keepstone.png');"></div>
+          </a>
           <p>A sophisticated private-AI product, explained clearly to both technical and non-technical visitors — proof that complicated services can still get a plainspoken website.</p>
-        </a>
-        <a class="work-card" href="https://emergencysupply1.com" target="_blank" rel="noopener">
-          <span class="site-name">EmergencySupply1</span>
-          <span class="site-url">emergencysupply1.com</span>
+        </div>
+        <div class="work-item">
+          <h3 class="site-name">EmergencySupply1</h3>
+          <a class="work-thumb" href="https://emergencysupply1.com" target="_blank" rel="noopener">
+            <div class="chrome-bar">
+              <span class="chrome-dot" style="background:#e8862f"></span>
+              <span class="chrome-dot" style="background:#3f5d4e"></span>
+              <span class="chrome-dot" style="background:#e4dcc9"></span>
+              <span class="chrome-url">emergencysupply1.com</span>
+            </div>
+            <div class="shot" style="background-image: url('assets/work-emergencysupply1.png');"></div>
+          </a>
           <p>A direct lead-generation site: one clear offer, a simple process, and a straightforward way to request a quote.</p>
-        </a>
+        </div>
       </div>
     </div>
   </section>
@@ -641,11 +702,11 @@
 
       <details class="faq">
         <summary>Is hosting really free? <span class="icon">+</span></summary>
-        <p>For sites that qualify — informational and lead-generation sites — yes, hosting is genuinely free through GitHub Pages, for as long as the site exists. The one cost that's never free is your domain name, which you register and own directly, typically $12–20/year.</p>
+        <p>For sites that qualify — informational and lead-generation sites — yes, hosting is genuinely free for as long as the site exists. We handle the technical setup, so there's nothing for you to configure or maintain. The one cost that's never free is your domain name, which you register and own directly, typically $12–20/year.</p>
       </details>
       <details class="faq">
         <summary>What if I need an online store or a login system later? <span class="icon">+</span></summary>
-        <p>That's outside what this model is built for. It's not something I'll quietly try to force into a static site — it needs a different setup and a custom conversation, which I'm happy to have if that's where your business is headed.</p>
+        <p>That's outside what this model is built for. It's not something we'll quietly try to force into a static site — it needs a different setup and a custom conversation, which we're happy to have if that's where your business is headed.</p>
       </details>
       <details class="faq">
         <summary>How long does a project take? <span class="icon">+</span></summary>
@@ -653,15 +714,15 @@
       </details>
       <details class="faq">
         <summary>Do you guarantee more customers or top Google rankings? <span class="icon">+</span></summary>
-        <p>No — and I'd be skeptical of anyone who does. I handle solid, correct on-page SEO basics as part of every project. Rankings and traffic depend on far more than any single website, so I won't promise results I don't control.</p>
+        <p>No — and we'd be skeptical of anyone who does. We handle solid, correct on-page SEO basics as part of every project. Rankings and traffic depend on far more than any single website, so we won't promise results we don't control.</p>
       </details>
       <details class="faq">
         <summary>What do I need to provide? <span class="icon">+</span></summary>
-        <p>Your business info, a logo if you have one (not required), any existing photos or content, and answers to a short project questionnaire. I'll help organize and write around whatever you send over.</p>
+        <p>Your business info, a logo if you have one (not required), any existing photos or content, and answers to a short project questionnaire. We'll help organize and write around whatever you send over.</p>
       </details>
       <details class="faq">
         <summary>What happens after launch if I need a change? <span class="icon">+</span></summary>
-        <p>Each package includes a set number of revision rounds. After that, additional changes are billed per-request or hourly — never as a recurring subscription just to keep your site running.</p>
+        <p>Each package includes a set number of revision rounds. After that, small changes are $50 per request, or you can add an optional Care Plan ($20/month) for ongoing updates and priority support. Neither is required — your site keeps running exactly as built either way, whether or not you ever touch it again.</p>
       </details>
     </div>
   </section>
@@ -673,11 +734,10 @@
         <h2>About</h2>
       </div>
       <div class="about-wrap">
-        <div class="about-mark" aria-hidden="true">GL</div>
+        <div class="about-mark" aria-hidden="true"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--ink)"/><path d="M50 20 L26 80 L50 80 Z" fill="var(--accent-light)"/><path d="M50 20 L74 80 L50 80 Z" fill="var(--accent-dark)"/></svg></div>
         <div>
-          <p>Hi — I'm Kevin McKenzie, and I run Go Live Pages from Freeport, Illinois.</p>
-          <p>I started this because I kept seeing the same two bad options: pay an agency several thousand dollars for a website, or sign up for a builder that quietly bills you every month forever for something that, for most small businesses, doesn't need an ongoing bill at all. There's a real, honest middle ground — a properly built, custom website, paid for once, hosted for free where that's genuinely possible.</p>
-          <p>I work with businesses in Freeport, Stephenson County, Rockford, and Northwest Illinois — and with remote clients anywhere else, just as easily.</p>
+          <p>We started GoLivePages because we kept seeing the same two bad options: pay an agency several thousand dollars for a website, or sign up for a builder that quietly bills you every month forever for something that, for most small businesses, doesn't need an ongoing bill at all. There's a real, honest middle ground — a properly built, custom website, paid for once, hosted for free where that's genuinely possible.</p>
+          <p>We build every project the same way — clear pricing upfront, real design work, and a site you fully own when it's done.</p>
         </div>
       </div>
     </div>
@@ -688,7 +748,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Let's go live</h2>
-        <p>Tell me a bit about your project. Submitting this opens a pre-filled email in your own email app — nothing is sent automatically, and nothing is stored anywhere on this site.</p>
+        <p>Tell us a bit about your project, and we'll follow up with next steps.</p>
       </div>
       <div class="contact-grid">
         <form id="quote-form">
@@ -714,18 +774,17 @@
             </select>
           </div>
           <div class="field">
-            <label for="f-message">Tell me about your business &amp; what you need</label>
+            <label for="f-message">Tell us about your business &amp; what you need</label>
             <textarea id="f-message" name="message" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Let's Go Live</button>
-          <p class="form-note">This opens your email app with the message pre-filled — you still choose to hit send.</p>
+          <button type="submit" class="btn btn-primary">Send Project Details</button>
+          <p id="form-status" class="form-note" role="status" hidden>Opening your email app with these details filled in — if nothing happens, use the email address to the right instead.</p>
         </form>
 
         <div class="contact-side">
           <h3>Prefer email directly?</h3>
           <p>Reach out anytime — no form required.</p>
-          <a class="email-link" href="mailto:hello@golivepages.com">hello@golivepages.com</a>
-          <p class="form-note" style="margin-top:18px;"><em>Placeholder contact address — replace before launch.</em></p>
+          <a class="email-link" href="mailto:contact@golivepages.com">contact@golivepages.com</a>
         </div>
       </div>
     </div>
@@ -737,8 +796,9 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand">Go Live Pages</div>
-        <p style="color:#c9beac; max-width:320px; margin:0;">From nothing to online, fast. Serving Freeport, Stephenson County, Rockford, and Northwest Illinois — remote clients welcome.</p>
+        <div class="foot-brand">GoLivePages</div>
+        <div style="color:#f0d9bf; font-size:0.85rem; margin-bottom:10px;">golivepages.com</div>
+        <p style="color:#c9beac; max-width:320px; margin:0;">From nothing to online, fast.</p>
       </div>
       <nav aria-label="Footer">
         <a href="#services">Services</a>
@@ -751,7 +811,7 @@
       </nav>
     </div>
     <div class="fine">
-      © 2026 Go Live Pages · Kevin McKenzie · Freeport, IL · <a href="mailto:hello@golivepages.com">hello@golivepages.com</a> (placeholder)
+      © 2026 GoLivePages · <a href="mailto:contact@golivepages.com">contact@golivepages.com</a>
     </div>
   </div>
 </footer>
@@ -778,10 +838,13 @@
         'Message:',
         message
       ];
-      var mailto = 'mailto:hello@golivepages.com'
+      var mailto = 'mailto:projects@golivepages.com'
         + '?subject=' + encodeURIComponent(subject)
         + '&body=' + encodeURIComponent(bodyLines.join('\n'));
       window.location.href = mailto;
+
+      var status = document.getElementById('form-status');
+      if (status) status.hidden = false;
     });
   })();
 
