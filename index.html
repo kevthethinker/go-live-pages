@@ -302,10 +302,15 @@
     font-family: inherit; font-size: 0.96rem; background: var(--card); color: var(--ink);
   }
   .field textarea { min-height: 110px; resize: vertical; }
-  .contact-side { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px; box-shadow: var(--shadow-sm); }
+  .contact-side { background: #eef4ef; border: 1px solid #cfe0d3; border-radius: 12px; padding: 26px; box-shadow: var(--shadow-sm); }
   .contact-side h3 { margin-bottom: 10px; }
+  .contact-side .email-row { margin-top: 14px; }
+  .contact-side .email-label {
+    display: block; font-size: 0.76rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--trust); margin-bottom: 2px;
+  }
   .contact-side .email-link {
-    display: inline-block; margin-top: 8px; font-weight: 600; word-break: break-all;
+    display: inline-block; font-weight: 600; word-break: break-all;
   }
   .form-note { font-size: 0.85rem; color: var(--ink-dim); margin-top: 10px; }
 
@@ -751,7 +756,8 @@
         <p>Tell us a bit about your project, and we'll follow up with next steps.</p>
       </div>
       <div class="contact-grid">
-        <form id="quote-form">
+        <form id="quote-form" action="https://formspree.io/f/mqpkrgnd" method="POST">
+          <input type="hidden" name="_subject" id="f-subject" value="Website project inquiry">
           <div class="field">
             <label for="f-name">Name</label>
             <input id="f-name" name="name" type="text" required>
@@ -778,13 +784,20 @@
             <textarea id="f-message" name="message" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Send Project Details</button>
-          <p id="form-status" class="form-note" role="status" hidden>Opening your email app with these details filled in — if nothing happens, use the email address to the right instead.</p>
+          <p id="form-status" class="form-note" role="status" hidden></p>
         </form>
 
         <div class="contact-side">
           <h3>Prefer email directly?</h3>
           <p>Reach out anytime — no form required.</p>
-          <a class="email-link" href="mailto:contact@golivepages.com">contact@golivepages.com</a>
+          <div class="email-row">
+            <span class="email-label">General</span>
+            <a class="email-link" href="mailto:contact@golivepages.com">contact@golivepages.com</a>
+          </div>
+          <div class="email-row">
+            <span class="email-label">Project inquiries</span>
+            <a class="email-link" href="mailto:projects@golivepages.com">projects@golivepages.com</a>
+          </div>
         </div>
       </div>
     </div>
@@ -820,31 +833,39 @@
   (function () {
     var form = document.getElementById('quote-form');
     if (!form) return;
+    var status = document.getElementById('form-status');
+    var subjectField = document.getElementById('f-subject');
+    var submitBtn = form.querySelector('button[type="submit"]');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = form.name.value.trim();
-      var business = form.business.value.trim();
-      var email = form.email.value.trim();
-      var type = form.type.value;
-      var message = form.message.value.trim();
 
-      var subject = 'Website project inquiry' + (business ? ' — ' + business : '');
-      var bodyLines = [
-        'Name: ' + name,
-        'Business: ' + (business || '—'),
-        'Email: ' + email,
-        'Project type: ' + type,
-        '',
-        'Message:',
-        message
-      ];
-      var mailto = 'mailto:projects@golivepages.com'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(bodyLines.join('\n'));
-      window.location.href = mailto;
+      if (subjectField) {
+        var business = form.business.value.trim();
+        subjectField.value = 'Website project inquiry' + (business ? ' — ' + business : '');
+      }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
 
-      var status = document.getElementById('form-status');
-      if (status) status.hidden = false;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (status) status.hidden = false;
+        if (response.ok) {
+          form.reset();
+          if (status) status.textContent = "Thanks — that's sent. We'll follow up soon.";
+        } else if (status) {
+          status.textContent = 'Something went wrong sending that. Please email us directly instead.';
+        }
+      }).catch(function () {
+        if (status) {
+          status.hidden = false;
+          status.textContent = 'Something went wrong sending that. Please email us directly instead.';
+        }
+      }).finally(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Project Details'; }
+      });
     });
   })();
 
